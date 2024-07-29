@@ -13,7 +13,7 @@ public class GeneralExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException e) {
-        ErrorResponse error = this.generateError(e, "Data Not Found");
+        ErrorResponse error = this.generateError(e, ErrorMessage.DATA_NOT_FOUND);
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
