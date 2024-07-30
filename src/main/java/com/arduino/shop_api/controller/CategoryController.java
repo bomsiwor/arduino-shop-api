@@ -5,6 +5,7 @@ import com.arduino.shop_api.model.request.CategoryRequest;
 import com.arduino.shop_api.model.response.GeneralResponse;
 import com.arduino.shop_api.model.response.MetadataResponse;
 import com.arduino.shop_api.service.impl.CategoryService;
+import com.arduino.shop_api.util.ValidationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -38,11 +39,21 @@ public class CategoryController {
 
     @PostMapping(value = "/category")
     public ResponseEntity<GeneralResponse<MetadataResponse, Boolean>> store(@RequestBody CategoryRequest request) {
+        // Validate request
+        ValidationUtil validator = new ValidationUtil();
+        validator.required(request.getName(), "Category Name");
+        validator.required(request.getDescription(), "Category Description");
+
         return new ResponseEntity<>(this.service.create(request), HttpStatus.CREATED);
     }
 
     @PutMapping(value="/category/{id}")
     public ResponseEntity<GeneralResponse<MetadataResponse, Boolean>> update(@PathVariable Integer id, @RequestBody CategoryRequest request) {
+        // Validate request
+        ValidationUtil validator = new ValidationUtil();
+        validator.required(request.getName(), "Category Name");
+        validator.required(request.getDescription(), "Category Description");
+
         return new ResponseEntity<>(this.service.update(request, id), HttpStatus.OK);
     }
 

@@ -2,6 +2,7 @@ package com.arduino.shop_api.model.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,5 @@ public class ErrorResponse {
 
     private String message;
 
-    @JsonIgnore
     private List<String> subErrors;
 }
