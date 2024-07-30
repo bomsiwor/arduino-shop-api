@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,4 +19,6 @@ public class ProductRequest extends BaseRequest {
     private String unit;
 
     private Long categoryId;
+
+    private List<String> imageUrl;
 }

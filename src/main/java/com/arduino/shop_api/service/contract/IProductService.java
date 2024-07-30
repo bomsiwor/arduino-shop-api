@@ -1,6 +1,7 @@
 package com.arduino.shop_api.service.contract;
 
 import com.arduino.shop_api.entity.Product;
+import com.arduino.shop_api.model.request.ProductRatingRequest;
 import com.arduino.shop_api.model.request.ProductRequest;
 import com.arduino.shop_api.model.response.GeneralResponse;
 import com.arduino.shop_api.model.response.MetadataResponse;
@@ -20,4 +21,8 @@ public interface IProductService {
     GeneralResponse<MetadataResponse, Boolean> update(ProductRequest request, int id);
 
     GeneralResponse<MetadataResponse, Boolean> delete(int id);
+
+    GeneralResponse<MetadataResponse, Float> getRating(int id);
+
+    GeneralResponse<MetadataResponse, Boolean> postRating(int id, ProductRatingRequest request);
 }

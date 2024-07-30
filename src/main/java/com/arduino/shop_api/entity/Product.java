@@ -1,18 +1,22 @@
 package com.arduino.shop_api.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
 @Getter
 @Setter
-@JsonPropertyOrder({"id", "name", "description", "location","specification", "price", "unit", "createdAt", "updatedAt", "category"})
+@JsonPropertyOrder({"id", "name", "description", "location","specification", "price", "unit","images", "createdAt", "updatedAt", "category"})
 public class Product extends BaseEntity{
 
     @Id
@@ -34,4 +38,11 @@ public class Product extends BaseEntity{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<ProductImage> images = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIgnore
+    private List<ProductRating> ratings = new ArrayList<>();
 }

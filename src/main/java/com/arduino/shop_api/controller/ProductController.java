@@ -1,6 +1,7 @@
 package com.arduino.shop_api.controller;
 
 import com.arduino.shop_api.entity.Product;
+import com.arduino.shop_api.model.request.ProductRatingRequest;
 import com.arduino.shop_api.model.request.ProductRequest;
 import com.arduino.shop_api.model.response.GeneralResponse;
 import com.arduino.shop_api.model.response.MetadataResponse;
@@ -44,5 +45,15 @@ public class ProductController {
     @DeleteMapping(value="/product/{id}")
     public ResponseEntity<GeneralResponse<MetadataResponse, Boolean>> deleteProduct(@PathVariable int id) {
         return new ResponseEntity<>(this.service.delete(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value="/product/rating/{id}")
+    public ResponseEntity<GeneralResponse<MetadataResponse, Float>> getRating(@PathVariable int id) {
+        return new ResponseEntity<>(this.service.getRating(id), HttpStatus.OK);
+    }
+
+    @PostMapping(value="/product/rating/{id}")
+    public ResponseEntity<GeneralResponse<MetadataResponse, Boolean>> postRating(@PathVariable int id, @RequestBody ProductRatingRequest request) {
+        return new ResponseEntity<>(this.service.postRating(id, request), HttpStatus.OK);
     }
 }
